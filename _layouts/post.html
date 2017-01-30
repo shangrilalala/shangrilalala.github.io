@@ -1,0 +1,47 @@
+---
+layout: defaultPost
+---
+<!-- 文章 -->
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+    {{ page.date | date: "%Y.%m.%d" }}
+    <!-- 分类 -->
+    {% unless page.categories == empty %}
+    {% assign categories_list = page.categories %}
+    {% if categories_list.first[0] == null %}
+      {% for category in categories_list %}
+        <a class="category" href="{{ site.BASE_PATH }}/category/#{{ category }}">{{ category | join: "/" }}{% unless forloop.last %},{% endunless %}</a>
+      {% endfor %}
+    {% else %}
+      {% for category in categories_list %}
+        <a class="category" href="{{ site.BASE_PATH }}/category/#{{ category[0] }}">
+          {{ category[0] | join: "/" }}
+        </a>
+      {% endfor %}
+    {% endif %}
+  {% endunless %}  </p>
+</header>
+<article class="post-content">
+  {{ content }}
+  <div class="content-bottom">
+    <p>本文链接：<a href="http://longlongzone.com{{ page.url }}">http://longlongzone.com{{ page.url }}</a></p>
+    <div class="payments clearfix">
+      <p>如果你也喜欢本文，欢迎丢硬币给我</p>
+      <img src="/images/payments/ali.png" alt="支付宝" width="100%">
+      <img src="/images/payments/wechat.png" alt="微信支付" width="100%">
+    </div>
+  </div>
+</article>
+<!-- 上一篇、下一篇文章 -->
+<ul class="pager">
+  {% if page.previous %}
+    <li class="previous on"><a href="{{ site.BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}"><span>{{ page.previous.date | date: "%Y.%m.%d"}}</span>{{ page.previous.title }}</a></li>
+  {% endif %}
+  {% if page.next %}
+    <li class="next on"><a href="{{ site.BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}"><span>{{ page.next.date | date: "%Y.%m.%d"}}</span>{{ page.next.title }}</a></li>
+  {% endif %}
+</ul>
+{% include disqus.html disqus_identifier=page.disqus_identifier %}
+</div>

@@ -1,0 +1,25 @@
+---
+layout: pageAbout
+title: Category
+header: Category
+permalink: /category/
+---
+{% for category in site.categories reversed %}
+  <div class="category" id="{{category[0]}}">
+    <h2 >{{ category[0] }}</h2>
+    <ul >
+      {% assign pages_list = category[1] %}
+      {% for node in pages_list %}
+        {% if node.title != null %}
+          {% if group == null or group == node.group %}
+            <li>
+            <span class="text-muted">{{ node.date | date: "%Y.%m.%d" }}</span>
+            <a href="{{ site.BASE_PATH }}{{node.url}}">{{node.title}}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% assign pages_list = nil %}
+    </ul>
+  </div>
+{% endfor %}
