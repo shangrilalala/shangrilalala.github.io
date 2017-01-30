@@ -1,2 +1,2 @@
 # shangrilalala.github.io
-A personal blog will be updating on longlongzone.com.
+A personal blog will be updated on longlongzone.com.
